@@ -13,6 +13,6 @@ package adventure;
 
 public class Adventurer {
 	
-	System.out.println("hey");
+	System.out.println("heya");
 
 }
