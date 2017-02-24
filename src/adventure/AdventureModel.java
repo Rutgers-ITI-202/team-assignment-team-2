@@ -61,28 +61,48 @@ public class AdventureModel {
 	rooms.add(room11);
 	
 	// Items and adding them into a random room.
-	Item battery = new Item("Battery", "Just a regular AA battery.");
+	
+		// Randomizes and makes sure both batteries do not spawn in the same room.
 	int batteryNum = (int)(Math.random()*9); //goes to 9 so that the battery does not spawn in the 10th room
 	int batteryNum2 = (int)(Math.random()*9); //^
 	while (batteryNum == batteryNum2){
 		batteryNum2 = (int)(Math.random()*9);
 	}
+	
+		// Randomly chooses one battery to be working and one to be dead
+	int rand1 = (int)(Math.random()*3)+1;
+	int rand2 = 0;
+	if (rand1 == 1){
+		rand2 = 2;
+	}
+	else{
+		rand2 = 1;
+	}
+	
+		// Add batteries to random rooms.
+	Item battery = new Item("Battery1", "Just a regular AA battery.", rand1);
 	rooms.get(batteryNum).items.add(battery);
-	Item deadBattery = new Item("Dead Battery", "Just a regular AA battery.");
+	Item deadBattery = new Item("Battery2", "Just a regular AA battery.", rand2);
 	rooms.get(batteryNum2).items.add(deadBattery);
-	Item flashLight = new Item("flashLight", "A flashlight, but it seems to be dead.");
+	
+		// Add the flashlight to a random room.
+	Item flashLight = new Item("flashlight", "A flashlight, but it seems to be dead.", 0);
 	int num = (int)(Math.random()*9);
 	rooms.get(num).items.add(flashLight);
 	System.out.println("THE FREAKING FLASHLIGHT IS IN " + (num+1));
 	
-	Item hint1 = new Item("Hint 1", "A hint to the exit!: ");
+		// Gives all items random descriptions
+	
+	
+		// Add all hints to random rooms.
+	Item hint1 = new Item("Hint1", "A hint to the exit!: ", 0);
 	rooms.get((int)(Math.random()*9)).items.add(hint1);
-	Item hint2 = new Item("Hint 2", "A hint to the exit!: ");
+	Item hint2 = new Item("Hint2", "A hint to the exit!: ", 0);
 	rooms.get((int)(Math.random()*9)).items.add(hint2);
-	Item hint3 = new Item("Hint 3", "A hint to the exit!: ");
+	Item hint3 = new Item("Hint3", "A hint to the exit!: ", 0);
 	rooms.get(9).items.add(hint3);
-	Item trap = new Item("Hint 4", "Whoa, this one looks a little different.");
-	rooms.get((int)(Math.random()*9)).items.add(trap);
+	Item hint4 = new Item("Hint4", "Whoa, this one looks a little different.", 0);
+	rooms.get((int)(Math.random()*9)).items.add(hint4);
 	}
 	
 	// Method to print out the map of the layout of the area.
@@ -122,13 +142,24 @@ public class AdventureModel {
 		boolean bat = false;
 		int numOfBats = 0;
 		for (int i = 0; i < player1.items.size(); i++){
-			if (player1.items.get(i).name.equals("Dead Battery")){
+			if (player1.items.get(i).name.equalsIgnoreCase("Battery1")){
 				deadBat = true;
 				numOfBats ++;
 			}
-			else if (player1.items.get(i).name.equals("Battery")){
+			else if (player1.items.get(i).name.equalsIgnoreCase("Battery2")){
 				bat = true;
 				numOfBats ++;
+			}
+		}
+		
+		
+		//Check to see if player has a hint
+		boolean hint = false;
+		int numOfHints = 0;
+		for (int i = 0; i < player1.items.size(); i++){
+			if (player1.items.get(i).name.equalsIgnoreCase("hint")){
+				hint = true;
+				numOfHints ++;
 			}
 		}
 		
@@ -323,37 +354,7 @@ public class AdventureModel {
 			System.out.println("The item has been added to the player's inventory.");
 			rooms.get(player1.location).items.remove(indexOfItemInRoom);
 			System.out.println("The item has been removed from the room.");
-			
-			/*
-			if(rooms.get(player1.location).items != null){ //there is an item(s) in the room
-				
-				System.out.println("Hello, I am printing.");
-				
-				if(((rooms.get(player1.location)).items).equals("flashLight") && secondWord.equals("flashLight")){
-					player1.items.addAll(rooms.get(player1.location).items.indexOf(secondWord), rooms.get(player1.location).items);
-					System.out.println("The player takes the flashLight.");
-				}
-				else if(((rooms.get(player1.location)).items).equals("battery") || ((rooms.get(player1.location)).items).equals("deadBattery") && secondWord.equals("battery")){
-					player1.items.addAll(rooms.get(player1.location).items.indexOf(secondWord), rooms.get(player1.location).items);
-					System.out.println("The player takes the battery.");
-				}
-				else if(((rooms.get(player1.location)).items).equals("hint1") || ((rooms.get(player1.location)).items).equals("hint2") || ((rooms.get(player1.location)).items).equals("hint3") && secondWord.equals("shinyJewel")){
-					player1.items.addAll(rooms.get(player1.location).items.indexOf(secondWord), rooms.get(player1.location).items);
-					System.out.println("The player takes the shinyJewel.");
-				}
-				
-				System.out.println("Hello, I am printing.");
-			}
-			
-			/*
-			
-			//System.out.println("You take the " + rooms.get(player1.location).items.get(rooms.get(player1.location).items.indexOf(secondWord)).name + ".");
-			System.out.println(rooms.get(player1.location).items.get(0));
-			
-			player1.items.add(rooms.get(player1.location).items.get(rooms.get(player1.location).items.indexOf(secondWord)));
-		
-			 */
-			
+						
 		}
 		
 		// If command is "take" and item does not exist
@@ -389,26 +390,13 @@ public class AdventureModel {
 					System.out.println("You can't use the flashlight because you either don't have a good battery or you don't have a battery at all");
 				}
 			}
+			
+			else if (numOfHints < 4 || hint){
+				System.out.println("Use of hints has not been implemented yet. The programmer is very tired.");
+			}
 			else{
 				System.out.println("That item can't be used");
 			}
-			// USE FLASHLIGHT ONLY?
-			/*for (int i = 0; i < player1.items.size(); i++){
-				if(player1.items.get(i).name.equalsIgnoreCase(secondWord)){
-					//player1.items.add(rooms.get(player1.location).items.get(i));
-					
-					if (player1.items.contains("deadBattery")){ //case for deadBattery
-						System.out.println("This battery is dead.");
-					}
-					if (player1.items.contains("battery")){ //case for working battery
-						System.out.println("The flashLight flickers and stays on.");
-					}
-					//do something (make case for 
-					else{
-						System.out.println("You need a battery for this flashLight.");
-					}
-				}
-			}*/
 			
 		}
 		
@@ -432,6 +420,5 @@ public class AdventureModel {
 		}
 		
 	}
-	
 	
 }
