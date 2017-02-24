@@ -61,48 +61,28 @@ public class AdventureModel {
 	rooms.add(room11);
 	
 	// Items and adding them into a random room.
-	
-		// Randomizes and makes sure both batteries do not spawn in the same room.
+	Item battery = new Item("Battery1", "Just a regular AA battery.");
 	int batteryNum = (int)(Math.random()*9); //goes to 9 so that the battery does not spawn in the 10th room
 	int batteryNum2 = (int)(Math.random()*9); //^
 	while (batteryNum == batteryNum2){
 		batteryNum2 = (int)(Math.random()*9);
 	}
-	
-		// Randomly chooses one battery to be working and one to be dead
-	int rand1 = (int)(Math.random()*3)+1;
-	int rand2 = 0;
-	if (rand1 == 1){
-		rand2 = 2;
-	}
-	else{
-		rand2 = 1;
-	}
-	
-		// Add batteries to random rooms.
-	Item battery = new Item("Battery1", "Just a regular AA battery.", rand1);
 	rooms.get(batteryNum).items.add(battery);
-	Item deadBattery = new Item("Battery2", "Just a regular AA battery.", rand2);
+	Item deadBattery = new Item("Battery2", "Just a regular AA battery.");
 	rooms.get(batteryNum2).items.add(deadBattery);
-	
-		// Add the flashlight to a random room.
-	Item flashLight = new Item("flashlight", "A flashlight, but it seems to be dead.", 0);
+	Item flashLight = new Item("flashLight", "A flashlight, but it seems to be dead.");
 	int num = (int)(Math.random()*9);
 	rooms.get(num).items.add(flashLight);
 	System.out.println("THE FREAKING FLASHLIGHT IS IN " + (num+1));
 	
-		// Gives all items random descriptions
-	
-	
-		// Add all hints to random rooms.
-	Item hint1 = new Item("Hint1", "A hint to the exit!: ", 0);
+	Item hint1 = new Item("Hint1", "A hint to the exit!: ");
 	rooms.get((int)(Math.random()*9)).items.add(hint1);
-	Item hint2 = new Item("Hint2", "A hint to the exit!: ", 0);
+	Item hint2 = new Item("Hint2", "A hint to the exit!: ");
 	rooms.get((int)(Math.random()*9)).items.add(hint2);
-	Item hint3 = new Item("Hint3", "A hint to the exit!: ", 0);
+	Item hint3 = new Item("Hint3", "A hint to the exit!: ");
 	rooms.get(9).items.add(hint3);
-	Item hint4 = new Item("Hint4", "Whoa, this one looks a little different.", 0);
-	rooms.get((int)(Math.random()*9)).items.add(hint4);
+	Item trap = new Item("Hint4", "Whoa, this one looks a little different.");
+	rooms.get((int)(Math.random()*9)).items.add(trap);
 	}
 	
 	// Method to print out the map of the layout of the area.
@@ -392,6 +372,7 @@ public class AdventureModel {
 			}
 			
 			else if (numOfHints < 4 || hint){
+				System.out.println("*Insert hint for 6 digit code*");
 				System.out.println("Use of hints has not been implemented yet. The programmer is very tired.");
 			}
 			else{
@@ -420,5 +401,7 @@ public class AdventureModel {
 		}
 		
 	}
+	
+	
 	
 }
