@@ -9,10 +9,27 @@ An adventurer can:
 �	Pick up, drop, look at, and use various objects.
 */
 
-package adventure;
+import java.util.*;
 
 public class Adventurer {
 	
-	System.out.println("heya");
-
+	//Item declarations(Start as false)
+	public static boolean helmet;
+	
+	
+	//Shows inventory with if-statements for each item (if true, then it displays)
+		public static void showInventory(){
+			
+			System.out.println("Current Inventory: ");
+			if(helmet == true){
+				System.out.println("Helmet");
+			}else{
+				System.out.println("Your inventory is empty");
+			}
+		}
+	
+	//ETC. Methods
+	
+	
 }
+
