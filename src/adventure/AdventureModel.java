@@ -112,6 +112,32 @@ public class AdventureModel{
 		System.out.println(room[x][y].getRoomDescription());
 		System.out.println();
 	}
+	// A class to display the attributes of the items
+	class Items {
+	   String itemName;
+	   int itemNumber;
+	   
+	  public void highPriority(String highItem) {
+		  String redKey;
+		  String blueKey;
+		  String greenKey;
+		  System.out.println("High Priority Items: " + itemName + "\nItem Number: " + itemNumber);
+	  
+	   }
+	  public void lowPriority(String lowItem) {
+		  String helmet;
+		  String flashlight;
+		  String medicalkit;
+		  System.out.println("Low Priority Items: " + itemName + "\nItem Number: " + itemNumber);
+		    
+	  }
+	}
+
+	class itemList extends Items {
+	   public void printList (String lowItem, String highItem){
+		   System.out.println("Full Item List: " + "\n" + lowItem + "\n" + highItem);
 	
+	   }
+	}
 	
 }
